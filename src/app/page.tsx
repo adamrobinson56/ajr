@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Logo } from "@/components/Logo";
 import { ContactForm } from "@/components/ContactForm";
-import { HeroVideo } from "@/components/HeroVideo";
 
 const services = [
   {
@@ -71,13 +70,12 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero */}
         <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-charcoal">
-          <HeroVideo className="absolute inset-0 h-full w-full object-cover opacity-70 motion-reduce:hidden" />
           <Image
-            src="/images/hero-poster.jpg"
+            src="/images/hero.jpg"
             alt=""
             fill
             priority
-            className="object-cover opacity-70 motion-safe:hidden"
+            className="object-cover opacity-70"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
           <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-transparent to-transparent" />
