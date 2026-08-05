@@ -41,7 +41,18 @@ const services = [
   },
 ];
 
-const caseStudies = [
+type CaseStudy = {
+  number: string;
+  name: string;
+  category: string;
+  image: string;
+  mark: string;
+  description: string;
+  /** Omitted while a project has no public site to link to yet. */
+  href?: string;
+};
+
+const caseStudies: CaseStudy[] = [
   {
     number: "01",
     name: "RotaHub",
@@ -61,6 +72,15 @@ const caseStudies = [
     description:
       "A Manchester-based creative agency site built to do one thing well: let the work speak. An editorial portfolio grid, full-screen case studies and a direct, no-friction enquiry form for businesses who want their brand to look as good as it really is.",
     href: "https://morningraincreative.com/",
+  },
+  {
+    number: "03",
+    name: "Ameya Golf",
+    category: "Brand & Web Design",
+    image: "/images/case-studies/ameyagolf.jpg",
+    mark: "/images/case-studies/ameyagolf-mark.png",
+    description:
+      "A UK golf travel specialist arranging bespoke trips across Spain, Portugal, Turkey and the UAE. Destination guides, stay-and-play packages and a tailored enquiry flow that asks where, when and how many — so every itinerary starts with the right detail.",
   },
 ];
 
@@ -179,49 +199,66 @@ export default function Home() {
             </div>
 
             <div className="mt-16 space-y-24">
-              {caseStudies.map(({ number, name, category, image, mark, description, href }, i) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group grid items-center gap-10 lg:grid-cols-[3fr_2fr] lg:gap-16 ${
-                    i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-                  }`}
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden bg-charcoal">
-                    <Image
-                      src={image}
-                      alt={`${name} preview`}
-                      fill
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div>
-                    <span className="font-serif text-2xl text-gold/50">{number}</span>
-                    <div className="mt-4 flex items-center gap-3">
+              {caseStudies.map(({ number, name, category, image, mark, description, href }, i) => {
+                // no `group` without a link — the hover zoom would imply the card is clickable
+                const layout = `${href ? "group " : ""}grid items-center gap-10 lg:grid-cols-[3fr_2fr] lg:gap-16 ${
+                  i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
+                }`;
+
+                const body = (
+                  <>
+                    <div className="relative aspect-[4/3] overflow-hidden bg-charcoal">
                       <Image
-                        src={mark}
-                        alt=""
-                        width={28}
-                        height={28}
-                        className="h-7 w-7 object-contain"
+                        src={image}
+                        alt={`${name} preview`}
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-105"
                       />
-                      <p className="text-xs font-medium uppercase tracking-[0.18em] text-ink/50">
-                        {category}
-                      </p>
                     </div>
-                    <h3 className="mt-4 font-serif text-2xl font-medium text-ink">{name}</h3>
-                    <p className="mt-4 text-[15px] leading-7 text-ink/60">{description}</p>
-                    <span className="mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-gold transition group-hover:text-ink">
-                      Visit site
-                      <span aria-hidden="true" className="transition group-hover:translate-x-1">
-                        →
-                      </span>
-                    </span>
+                    <div>
+                      <span className="font-serif text-2xl text-gold/50">{number}</span>
+                      <div className="mt-4 flex items-center gap-3">
+                        <Image
+                          src={mark}
+                          alt=""
+                          width={28}
+                          height={28}
+                          className="h-7 w-7 object-contain"
+                        />
+                        <p className="text-xs font-medium uppercase tracking-[0.18em] text-ink/50">
+                          {category}
+                        </p>
+                      </div>
+                      <h3 className="mt-4 font-serif text-2xl font-medium text-ink">{name}</h3>
+                      <p className="mt-4 text-[15px] leading-7 text-ink/60">{description}</p>
+                      {href && (
+                        <span className="mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-gold transition group-hover:text-ink">
+                          Visit site
+                          <span aria-hidden="true" className="transition group-hover:translate-x-1">
+                            →
+                          </span>
+                        </span>
+                      )}
+                    </div>
+                  </>
+                );
+
+                return href ? (
+                  <a
+                    key={name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={layout}
+                  >
+                    {body}
+                  </a>
+                ) : (
+                  <div key={name} className={layout}>
+                    {body}
                   </div>
-                </a>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
