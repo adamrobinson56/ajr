@@ -200,9 +200,14 @@ export default function Home() {
 
             <div className="mt-16 space-y-24">
               {caseStudies.map(({ number, name, category, image, mark, description, href }, i) => {
+                // Alternating rows mirror the layout, but the image always takes the wider
+                // track — so the column order flips with it, keeping every preview the
+                // same size rather than shrinking every other one.
                 // no `group` without a link — the hover zoom would imply the card is clickable
-                const layout = `${href ? "group " : ""}grid items-center gap-10 lg:grid-cols-[3fr_2fr] lg:gap-16 ${
-                  i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
+                const layout = `${href ? "group " : ""}grid items-center gap-10 lg:gap-16 ${
+                  i % 2 === 1
+                    ? "lg:grid-cols-[2fr_3fr] lg:[&>*:first-child]:order-2"
+                    : "lg:grid-cols-[3fr_2fr]"
                 }`;
 
                 const body = (
