@@ -136,8 +136,8 @@ export default function Home() {
         </section>
 
         {/* Services */}
-        <section id="services" className="bg-cream">
-          <div className="mx-auto max-w-5xl px-6 py-28">
+        <section id="services" className="scroll-mt-24 bg-cream">
+          <div className="mx-auto max-w-5xl px-6 pt-28 pb-12">
             <div className="max-w-xl">
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gold">
                 What we do
@@ -167,8 +167,8 @@ export default function Home() {
         </section>
 
         {/* Case studies */}
-        <section id="work" className="bg-cream">
-          <div className="mx-auto max-w-5xl px-6 py-28">
+        <section id="work" className="scroll-mt-24 bg-cream">
+          <div className="mx-auto max-w-5xl px-6 pt-6 pb-28">
             <div className="max-w-xl">
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gold">
                 Selected work
